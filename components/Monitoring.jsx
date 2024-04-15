@@ -9,8 +9,8 @@ import { Text,
 import { Card, Title, Paragraph } from "react-native-paper";
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import { firebaseDatabase } from './firebaseConfig'; //import  for realtime db
-import { ref, onValue, off } from 'firebase/database'; //import for realtime db
+import { firebaseDatabase } from './firebaseConfig';
+import { ref, onValue, off } from 'firebase/database';
 
 
 const { width } = Dimensions.get("window");
@@ -42,7 +42,6 @@ const Monitoring = ({navigation}) => {
             const getData = snapshot.val();
             console.log('Snapshot data:', getData);
 
-            // Update component state with retrieved data
             setTemperature(getData.temperature);
             setWater(getData.water);
             setFood(getData.food);
@@ -65,11 +64,10 @@ const Monitoring = ({navigation}) => {
 
     onValue(databaseRef, fetchData, handleError);
 
-    // Cleanup function to remove the listener when the component unmounts
     return () => {
         off(databaseRef, 'value', fetchData);
     };
-}, []); // Empty dependency array to run once on component mount
+}, []);
 
 
   return (
